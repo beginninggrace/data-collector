@@ -1,5 +1,9 @@
 package com.sini.data_collector.domain.dataDevice.service;
 
+import com.sini.data_collector.domain.dataDevice.dto.DataRequestDto;
+import com.sini.data_collector.domain.dataDevice.dto.DataResponseDto;
+import com.sini.data_collector.domain.dataDevice.entity.DataDeviceGroup;
+import com.sini.data_collector.domain.dataDevice.repository.DataDeviceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +11,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DataDeviceService {
 
-//    public DataResponseDto createDataDeviceGroup(DataRequestDto dataRequestDto) {
-//        return null;
-//    }
+    private final DataDeviceRepository dataDeviceRepository;
+    public DataResponseDto createDataDeviceGroup(DataRequestDto dataRequestDto) {
+        DataDeviceGroup dataDeviceGroup = dataDeviceRepository.save(new DataDeviceGroup(dataRequestDto));
+        return new DataResponseDto(
+            dataDeviceGroup.getDataDeviceGroupId(),
+            dataDeviceGroup.getSerialNumber(),
+            dataDeviceGroup.getCreatedAt()
+        );
+    }
 }

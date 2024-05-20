@@ -1,5 +1,7 @@
 package com.sini.data_collector.domain.dataDevice.entity;
 
+import com.sini.data_collector.domain.dataDevice.dto.DataRequestDto;
+import com.sini.data_collector.domain.dataDevice.dto.DataResponseDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,4 +28,9 @@ public class DataDeviceGroup {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+
+    public DataDeviceGroup(DataRequestDto dataRequestDto) {
+        this.serialNumber = dataRequestDto.getStationGroupSerial();
+        this.createdAt = LocalDateTime.now();
+    }
 }
